@@ -1,7 +1,7 @@
 # Oneiric v0.0.1 initial push (Minecraft Alpha 1.1.2_01 Mod)
 
 
-## Features of the Nothing Burguer Release
+## Features of the Nothing Burger Release
 - Pratically Nothing
 - Pastel Pink/Lavender Skies (`0xD4A0C8`)
 - Warm Pastel Fog (`0xE8B4A0`)
