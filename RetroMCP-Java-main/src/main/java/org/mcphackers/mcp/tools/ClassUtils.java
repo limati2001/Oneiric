@@ -1,0 +1,78 @@
+package org.mcphackers.mcp.tools;
+
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+
+import org.objectweb.asm.ClassReader;
+
+public abstract class ClassUtils {
+	@SuppressWarnings("unchecked")
+	public static <T> List<Class<T>> getClasses(Path p, Class<T> type) throws Exception {
+		String pathToJar = p.toAbsolutePath().toString();
+		JarFile jarFile = new JarFile(pathToJar);
+		Enumeration<JarEntry> e = jarFile.entries();
+
+		List<Class<T>> classes = new ArrayList<>();
+		URL[] urls = {new URL("jar:file:" + pathToJar + "!/")};
+		URLClassLoader cl = URLClassLoader.newInstance(urls);
+
+		while (e.hasMoreElements()) {
+			JarEntry je = e.nextElement();
+			if (je.isDirectory() || !je.getName().endsWith(".class")) {
+				continue;
+			}
+			// -6 because of .class
+			String className = je.getName().substring(0, je.getName().length() - 6);
+			className = className.replace('/', '.');
+			Class<?> cls = cl.loadClass(className);
+			if (type.isAssignableFrom(cls)) {
+				classes.add((Class<T>) cls);
+			}
+		}
+		jarFile.close();
+		return classes;
+	}
+
+	/**
+	 * {@link Modifier#isAbstract(int)} does no guarantee that all methods were implemented in the compiled class
+	 * And there is a chance it was compiled from a different source where one of the methods didn't exist
+	 */
+	public static boolean isClassAbstract(Class<?> type) {
+		for (Method meth : type.getMethods()) {
+			if (Modifier.isAbstract(meth.getModifiers())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static int getSourceFromClassVersion(int classVersion) {
+		if (classVersion >= 45) {
+			return classVersion - 44;
+		}
+		return -1;
+	}
+
+	public static int getClassVersion(Path path) {
+		try {
+			byte[] classBytes = Files.readAllBytes(path);
+			ClassReader cr = new ClassReader(classBytes);
+
+			return cr.readUnsignedShort(6);
+		} catch (IOException ignored) {
+		}
+
+		// Java 8 as a sane default
+		return 52;
+	}
+}

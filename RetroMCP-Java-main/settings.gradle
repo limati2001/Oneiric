@@ -1,0 +1,4 @@
+rootProject.name = 'RetroMCP-Java'
+
+include "gui"
+include "cli"
