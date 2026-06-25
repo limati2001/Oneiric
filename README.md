@@ -2,9 +2,9 @@
 
 
 ## Features of the v0.0.2 snapshot
-- Bug fix: alpha leaf block decayin trees
+- Bug fix: alpha leaf block decaying trees
 - Window and GUI title changed/removed
-- Major changes in world gen. to more vast landscapes and less liquid gen.
+- World generation reworked: flatter ocean thresholds, broader terrain noise, reduced sand coverage, and lower lily pad/mushroom spawn rates
 - Cactus removed. Entirely.
 
 
