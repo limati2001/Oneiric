@@ -13,3 +13,4 @@
 3. Go to **Version** -> **Add to minecraft.jar** and select the downloaded zip.
 4. Move the jar mod up to top
 5. Play
+
