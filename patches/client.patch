@@ -1,0 +1,28 @@
+--- net/minecraft/src/World.java
++++ net/minecraft/src/World.java
+@@ -109,9 +109,9 @@
+ 		this.loadedTileEntityList = new ArrayList();
+ 		this.worldTime = 0L;
+ 		this.snowCovered = false;
+-		this.skyColor = 8961023L;
+-		this.fogColor = 12638463L;
+-		this.cloudColor = 16777215L;
++		this.skyColor = 0xD4A0C8L;
++		this.fogColor = 0xE8B4A0L;
++		this.cloudColor = 0xF5D5E8L;
+ 		this.skylightSubtracted = 0;
+ 		this.updateLCG = (new Random()).nextInt();
+ 		this.DIST_HASH_MAGIC = 1013904223;
+@@ -143,9 +143,9 @@
+ 		this.loadedTileEntityList = new ArrayList();
+ 		this.worldTime = 0L;
+ 		this.snowCovered = false;
+-		this.skyColor = 8961023L;
+-		this.fogColor = 12638463L;
+-		this.cloudColor = 16777215L;
++		this.skyColor = 0xD4A0C8L;
++		this.fogColor = 0xE8B4A0L;
++		this.cloudColor = 0xF5D5E8L;
+ 		this.skylightSubtracted = 0;
+ 		this.updateLCG = (new Random()).nextInt();
+ 		this.DIST_HASH_MAGIC = 1013904223;

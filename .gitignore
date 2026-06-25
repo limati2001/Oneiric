@@ -1,0 +1,13 @@
+# Ignore compiled game files and binaries
+/build/
+/jars/
+/libraries/
+/minecraft/
+/minecraft_server/
+*.jar
+*.class
+options.cfg
+
+# Keep the basics
+!.gitignore
+!patches/
